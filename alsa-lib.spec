@@ -1,7 +1,7 @@
 Summary:	Advanced Linux Sound Architecture (ALSA) - Library
 Name:		alsa-lib
 Version:	1.0.25
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
@@ -64,10 +64,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libasound.so.?
 %attr(755,root,root) %{_libdir}/libasound.so.*.*.*
 
-%attr(755,root,root) %{_libdir}/alsa-lib/smixer/smixer-*.so
-
 %dir %{_libdir}/alsa-lib
 %dir %{_libdir}/alsa-lib/smixer
+%attr(755,root,root) %{_libdir}/alsa-lib/smixer/smixer-ac97.so
+%attr(755,root,root) %{_libdir}/alsa-lib/smixer/smixer-hda.so
+%attr(755,root,root) %{_libdir}/alsa-lib/smixer/smixer-sbase.so
+
 %dir %{_sysconfdir}/alsa
 %dir %{_sysconfdir}/alsa/alsa.conf.d
 %dir %{_sysconfdir}/alsa/cards
