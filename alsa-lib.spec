@@ -1,11 +1,11 @@
 Summary:	Advanced Linux Sound Architecture (ALSA) - Library
 Name:		alsa-lib
-Version:	1.0.25
-Release:	3
+Version:	1.0.26
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
-# Source0-md5:	06fe5819020c6684b991dcffc5471304
+# Source0-md5:	2dfa35d28471d721e592b616beedf965
 URL:		http://www.alsa-project.org/
 BuildRequires:	alsa-driver-devel
 BuildRequires:	autoconf
