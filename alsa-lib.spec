@@ -1,11 +1,11 @@
 Summary:	Advanced Linux Sound Architecture (ALSA) - Library
 Name:		alsa-lib
-Version:	1.0.26
+Version:	1.0.27
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
-# Source0-md5:	2dfa35d28471d721e592b616beedf965
+# Source0-md5:	f090c7dbd0fe57d786d82e411eac2d08
 URL:		http://www.alsa-project.org/
 BuildRequires:	alsa-driver-devel
 BuildRequires:	autoconf
@@ -31,12 +31,15 @@ Advanced Linux Sound Architecture (ALSA) - header files.
 %prep
 %setup -q
 
+%{__sed} -i "s|AM_CONFIG_HEADER|AC_CONFIG_HEADERS|" configure.in
+
 %build
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
-%configure			\
+%configure \
+	--disable-silent-rules	\
 	--disable-static	\
 	--with-configdir=%{_sysconfdir}/alsa
 %{__make}
