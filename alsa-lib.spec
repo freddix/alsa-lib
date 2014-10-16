@@ -1,11 +1,11 @@
 Summary:	Advanced Linux Sound Architecture (ALSA) - Library
 Name:		alsa-lib
-Version:	1.0.27.2
+Version:	1.0.28
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
-# Source0-md5:	69129a7c37697f81ac092335e9fa452b
+# Source0-md5:	c9e21b88a2b3e6e12ea7ba0f3b271fc3
 URL:		http://www.alsa-project.org/
 BuildRequires:	alsa-driver-devel
 BuildRequires:	autoconf
@@ -31,8 +31,6 @@ Advanced Linux Sound Architecture (ALSA) - header files.
 %prep
 %setup -q
 
-%{__sed} -i "s|AM_CONFIG_HEADER|AC_CONFIG_HEADERS|" configure.in
-
 %build
 %{__libtoolize}
 %{__aclocal} -I m4
@@ -40,8 +38,7 @@ Advanced Linux Sound Architecture (ALSA) - header files.
 %{__automake}
 %configure \
 	--disable-silent-rules	\
-	--disable-static	\
-	--with-configdir=%{_sysconfdir}/alsa
+	--disable-static
 %{__make}
 
 %install
@@ -53,7 +50,7 @@ install -d $RPM_BUILD_ROOT%{_datadir}/alsa
 
 install -D utils/alsa.m4 $RPM_BUILD_ROOT%{_aclocaldir}/alsa.m4
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/alsa-lib/smixer/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/{,alsa-lib/smixer/}*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -73,16 +70,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/alsa-lib/smixer/smixer-hda.so
 %attr(755,root,root) %{_libdir}/alsa-lib/smixer/smixer-sbase.so
 
-%dir %{_sysconfdir}/alsa
-%dir %{_sysconfdir}/alsa/alsa.conf.d
-%dir %{_sysconfdir}/alsa/cards
-%dir %{_sysconfdir}/alsa/pcm
 %dir %{_datadir}/alsa
+%dir %{_datadir}/alsa/alsa.conf.d
+%dir %{_datadir}/alsa/cards
+%dir %{_datadir}/alsa/pcm
 
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/alsa/*.conf
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/alsa/pcm/*.conf
-%{_sysconfdir}/alsa/*.alisp
-%{_sysconfdir}/alsa/cards
+%{_datadir}/alsa/*.conf
+%{_datadir}/alsa/pcm/*.conf
+%{_datadir}/alsa/*.alisp
+%{_datadir}/alsa/cards
 
 %files devel
 %defattr(644,root,root,755)
